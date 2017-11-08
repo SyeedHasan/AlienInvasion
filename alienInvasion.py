@@ -1,6 +1,7 @@
 #System modules
 import pygame
 from pygame.sprite import Group
+
 #User Imported Modules
 from settings import Settings
 from ship import Ship
@@ -23,14 +24,21 @@ def run_game():
 	#Make a group to store bullets in (similar to lists)
 	bullets = Group()
 
+	#Make a group of Aliens
+	aliens = Group()
+
+
+	#Create a fleet of aliens
+	gf.createFleet(ai_settings, screen, ship, aliens)
+
 	# Start the main loop for the game.
 	while True:
 		# Watch for keyboard and mouse events.
 		gf.checkEvents(ai_settings, screen, ship, bullets)
 		ship.update()
 		gf.updateBullets(bullets)
-		print(len(bullets))
-		gf.updateScreen(ai_settings, screen, ship, bullets)
+		gf.updateAliens(ai_settings, aliens)
+		gf.updateScreen(ai_settings, screen, ship, aliens, bullets)
 
 
 run_game()
